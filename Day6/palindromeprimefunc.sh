@@ -1,25 +1,44 @@
-echo "Enter the number"
-read n
-function palin()
+read -p "Enter the number: " n
+og=$n
+reverse=0
+count=0
+
+function isPrime()
 {
-temp=$n
-sum=0
-while [ $n -gt 0 ]
-do
-r=`expr $n % 10 `
-n=`expr $n / 10 `
-sum=`expr $sum \* 10 + $r`
-done
-echo $sum
-if [ $temp -eq $sum ]
-then
-    echo "Number is palindrome"
-else
-    echo "Number is not palindrome"
-fi
+	for (( i=1; i<=$n; i++ ))
+	do
+		if [ $(( n % i )) -eq 0 ]
+		then
+			count=$(( count + 1 ))
+		fi
+	done
+
+	if [ $count -eq 2 ]
+	then
+		echo $n is Prime Number
+
+		echo "$( isPalindrome $number )"
+	else
+		echo $n is not prime Number
+	fi
 }
-rev=$((palin $n))
-echo "$rev"
 
+function isPalindrome()
+{
+	while [ $n -ne 0 ]
+	do
+		remainder=$(( $n % 10 ))
+		reverse=$(( reverse * 10 +remainder ))
+		n=$(( $n / 10 ))
+	done
+	echo $reverse
+	if [ $og -eq $reverse ]
+	then
+		echo "Number is Palindrome"
+	else
+		echo "Number is not Palindrome"
+	fi
+}
 
-
+echo "$( isPrime $n )"
+echo "$( isPrime $reverse )"
